@@ -32,6 +32,9 @@ hyperfine \
 highlight \
 nvim \
 youtube-dl \
+autojump \
+httpie \
+thefuck \
 golang
 
 echo "Installing cask apps .."
@@ -60,6 +63,13 @@ whatsapp \
 authy \
 pixel-picker \
 suspicious-package \
+dash \
+insomnia \
+kawa \
+copyq \
+calibre \
+microsoft-office \
+brave-browser \
 font-fira-code
 
 echo "Installing font"

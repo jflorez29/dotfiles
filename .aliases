@@ -1,4 +1,24 @@
 alias ll="exa --long --header --git --time-style=long-iso --links"
 alias la="exa --long --header --git --all --time-style=long-iso --links"
+alias lst="tree -L 2"
 alias ssh-copy="pbcopy < ~/.ssh/id_rsa.pub && echo 'Copied !!'"
 alias ssh-start="eval `ssh-agent` && ssh-add ~/.ssh/id_rsa"
+alias c=clear
+alias k='kill -9'
+alias reload='source ~/.zshrc'
+alias vim=nvim
+alias cp="cp -iv"
+alias mkdir="mkdir -pv"
+
+# Git
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit -v'
+alias gc!='git commit -v --amend'
+alias gcn!='git commit -v --no-edit --amend'
+alias gca="git add --all && git commit --amend --no-edit"
+alias gs="git status -sb"
+alias gcf='git config --list'
+alias gp='git push'
+alias gm='git merge'
+alias gts='git tag -s'

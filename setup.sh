@@ -23,6 +23,16 @@ tree \
 exa \
 cowsay \
 bat \
+clementtsang/bottom/bottom \
+vim \
+tldr \
+jid \
+prettyping \
+hyperfine \
+highlight \
+nvim \
+youtube-dl \
+golang
 
 echo "Installing cask apps .."
 
@@ -46,6 +56,10 @@ zoom \
 vlc \
 numi \
 intellij-idea \
+whatsapp \
+authy \
+pixel-picker \
+suspicious-package \
 font-fira-code
 
 echo "Installing font"
@@ -66,7 +80,7 @@ cp .aliases ~/
 cp .functions ~/
 cp .zshrc ~/
 cp .gitconfig ~/
-cp .p10k.zsh
+cp .p10k.zsh ~/
 
 echo "Generating a ssh key"
 ssh-keygen

@@ -11,67 +11,66 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.oh-my-zsh/fzf
 ~/.oh-my-zsh/fzf/install
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
 echo "Installing Homebrew ..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo "Select apps to install"
+echo "Installing apps .."
 
-while true; do
-    read -p "Do you wish to install tree? [y/n]" yn
-    case $yn in
-        [Yy]* ) brew install tree; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+brew install htop \
+tree \
+exa \
+cowsay \
+bat \
 
-while true; do
-    read -p "Do you wish to install htop? [y/n]" yn
-    case $yn in
-        [Yy]* ) brew install htop; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+echo "Installing cask apps .."
 
+brew cask install firefox \
+spotify \
+agenda \
+iterm2 \
+expressvpn \
+alfred \
+lastpass \
+the-unarchiver \
+visual-studio-code \
+docker \
+postman \
+atom \
+stats \
+notion \
+telegram \
+ticktick \
+zoom \
+vlc \
+numi \
+intellij-idea \
+font-fira-code
 
-while true; do
-    read -p "Do you wish to install exa? [y/n]" yn
-    case $yn in
-        [Yy]* ) brew install exa; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+echo "Installing font"
+brew tap homebrew/cask-fonts
+brew cask install font-hack-nerd-font
 
-while true; do
-    read -p "Do you wish to install sdkman? [y/n]" yn
-    case $yn in
-        [Yy]* ) curl -s "https://get.sdkman.io" | bash; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+echo "Installing sdk"
+curl -s "https://get.sdkman.io" | bash
 
-while true; do
-    read -p "Do you wish to install node? [y/n]" yn
-    case $yn in
-        [Yy]* ) curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash && nvm install node lts; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+echo "Installing nvm"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
 
-while true; do
-    read -p "Do you want to create a ssh key now? [y/n]" yn
-    case $yn in
-        [Yy]* ) ssh-keygen; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+echo "Installing node LTS"
+nvm install node lts
 
+echo "Copying files"
 cp .aliases ~/
 cp .functions ~/
 cp .zshrc ~/
+cp .gitconfig ~/
+cp .p10k.zsh
+
+echo "Generating a ssh key"
+ssh-keygen
+
+echo "Creating screenshots folder"
+mkdir -p  ~/Desktop/screenshots
+defaults write com.apple.screencapture location ~/Desktop/screenshots

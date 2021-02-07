@@ -97,7 +97,8 @@ webpquicklook \
 quicklook-csv \
 brave-browser \
 discord \
-virtualbox
+virtualbox \
+skype
 
 brew cleanup
 

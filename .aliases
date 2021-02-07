@@ -24,7 +24,6 @@ alias lst="tree -L 2"
 
 # ssh utils
 alias ssh-copy="pbcopy < ~/.ssh/id_rsa.pub && echo 'Copied !!'"
-alias ssh-start="eval `ssh-agent` && ssh-add ~/.ssh/id_rsa"
 
 # Commands
 alias c=clear

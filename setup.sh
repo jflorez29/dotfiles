@@ -98,7 +98,8 @@ quicklook-csv \
 brave-browser \
 discord \
 virtualbox \
-skype
+skype \
+totalfinder
 
 brew cleanup
 

@@ -9,20 +9,24 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 echo "Setting zsh as default ..."
 chsh -s $(which zsh)
 
-echo "Installing Oh-My-Zsh .."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
-  echo "Could not install Oh My Zsh" >/dev/stderr
-  exit 1
-}
+echo "Installing Xcode Command Line Tools."
+# Install Xcode command line tools
+xcode-select --install
+
+source $HOME/.zshrc
 
 echo "Installing Homebrew ..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" -s --batch || {
   echo "Could not install homebrew" >/dev/stderr
   exit 1
 }
+
 brew update
 brew tap homebrew/cask
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
+
+echo "Installing font"
+brew install --cask font-hack-nerd-font
 
 echo "Installing GNU utilities .."
 # Install GNU core utilities (those that come with OS X are outdated).
@@ -57,7 +61,9 @@ httpie \
 thefuck \
 golang \
 python \
-python3
+python3 \
+git \
+kap
 
 echo "Installing cask apps .."
 
@@ -98,14 +104,9 @@ quicklook-csv \
 brave-browser \
 discord \
 virtualbox \
-skype \
-totalfinder
+skype
 
 brew cleanup
-
-echo "Installing font"
-brew tap homebrew/cask-fonts
-brew install --cask font-hack-nerd-font
 
 echo "Installing sdk"
 curl -s "https://get.sdkman.io" | bash
@@ -113,15 +114,26 @@ curl -s "https://get.sdkman.io" | bash
 echo "Installing nvm"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completio
+
 echo "Installing node LTS"
 nvm install node lts
 
+echo "Installing Oh-My-Zsh .."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
+  echo "Could not install Oh My Zsh" >/dev/stderr
+  exit 1
+}
+
 echo "installing zsh plugins ..."
-git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
 
 echo "Copying files"
 cp .aliases ~/
@@ -131,13 +143,6 @@ cp .zshrc ~/
 cp .gitconfig ~/
 cp .p10k.zsh ~/
 cp -R .iterm-themes ~/
-
-echo "Generating a ssh key"
-ssh-keygen
-
-echo "Installing Xcode Command Line Tools."
-# Install Xcode command line tools
-xcode-select --install
 
 echo "Setting configuration defaults"
 mkdir -p  ~/Desktop/screenshots
@@ -208,3 +213,6 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 for app in "Activity Monitor" "cfprefsd" "Dock" "Finder" "SystemUIServer"; do
     killall "${app}" > /dev/null 2>&1
 done
+
+echo "Generating a ssh key"
+ssh-keygen

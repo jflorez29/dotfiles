@@ -20,7 +20,8 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # List files and directories
 alias ll="exa --long --header --git --time-style=long-iso --links"
 alias la="exa --long --header --git --all --time-style=long-iso --links"
-alias lst="tree -L 2"
+alias tr="tree -L 2"
+alias tra="tree -L 2 -a"
 
 # ssh utils
 alias ssh-copy="pbcopy < ~/.ssh/id_rsa.pub && echo 'Copied !!'"
@@ -32,6 +33,7 @@ alias reload='source ~/.zshrc'
 alias vim=nvim
 alias cp="cp -iv"
 alias mkdir="mkdir -pv"
+alias cat="bat"
 
 # Git
 alias g='git'

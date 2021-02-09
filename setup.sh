@@ -21,6 +21,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/inst
   exit 1
 }
 
+source $HOME/.zshrc
+
 brew update
 brew tap homebrew/cask
 brew tap homebrew/cask-fonts
@@ -109,7 +111,7 @@ skype
 brew cleanup
 
 echo "Installing sdk"
-curl -s "https://get.sdkman.io" | bash
+curl -s "https://get.sdkman.io?rcupdate=false" | bash
 
 echo "Installing nvm"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash

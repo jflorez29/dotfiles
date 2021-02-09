@@ -20,31 +20,28 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # List files and directories
 alias ll="exa --long --header --git --time-style=long-iso --links"
 alias la="exa --long --header --git --all --time-style=long-iso --links"
-alias tr="tree -L 2"
-alias tra="tree -L 2 -a"
 
 # ssh utils
 alias ssh-copy="pbcopy < ~/.ssh/id_rsa.pub && echo 'Copied !!'"
 
 # Commands
 alias c=clear
-alias k='kill -9'
-alias reload='source ~/.zshrc'
+alias k="kill -9"
+alias reload="source ~/.zshrc"
 alias vim=nvim
 alias cp="cp -iv"
 alias mkdir="mkdir -pv"
-alias cat="bat"
 
 # Git
-alias g='git'
-alias ga='git add'
-alias gaa='git add --all'
-alias gc='git commit -v'
-alias gc!='git commit -v --amend'
-alias gcn!='git commit -v --no-edit --amend'
+alias g="git"
+alias ga="git add"
+alias gaa="git add --all"
+alias gc="git commit -v"
+alias gc!="git commit -v --amend"
+alias gcn!="git commit -v --no-edit --amend"
 alias gca="git add --all && git commit --amend --no-edit"
 alias gs="git status -sb"
-alias gcf='git config --list'
-alias gp='git push'
-alias gm='git merge'
-alias gts='git tag -s'
+alias gcf="git config --list"
+alias gp="git push"
+alias gm="git merge"
+alias gts="git tag -s"

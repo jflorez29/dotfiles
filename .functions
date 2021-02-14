@@ -62,3 +62,8 @@ gz() {
 
 }
 
+compress() {
+  echo "Compressing '$1' ..."
+  tar -cpJf "$1".tar.xz "$1"
+  echo "Done"
+}

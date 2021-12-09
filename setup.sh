@@ -6,6 +6,9 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until `osx.sh` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+echo "Removing existing dotfiles"
+rm -rf ~/.aliases ~/.exports ~/.functions ~/.vim ~/.vimrc ~/.zshrc ~/.tmux ~/.tmux.conf ~/.config/nvim 2> /dev/null
+
 echo "Setting zsh as default ..."
 chsh -s $(which zsh)
 
@@ -27,8 +30,11 @@ brew update
 brew tap homebrew/cask
 brew tap homebrew/cask-fonts
 
-echo "Installing font"
-brew install --cask font-hack-nerd-font
+echo "Installing fonts"
+brew install --cask font-fira-code-nerd-font \
+font-cascadia-mono \
+font-iosevka-nerd-font \
+font-meslo-lg-nerd-font
 
 echo "Installing GNU utilities .."
 # Install GNU core utilities (those that come with OS X are outdated).
@@ -45,26 +51,28 @@ brew install gnu-sed
 echo "Installing apps .."
 
 brew install htop \
+ag \
 tree \
 exa \
 cowsay \
 bat \
-clementtsang/bottom/bottom \
+bottom \
 vim \
 tldr \
 jid \
-prettyping \
+jq \
+go \
+libpq \
 hyperfine \
 highlight \
 nvim \
 youtube-dl \
 autojump \
 httpie \
-thefuck \
-golang \
-python \
-python3 \
+pyenv \
+ripgrep \
 git \
+tmux \
 kap
 
 echo "Installing cask apps .."
@@ -80,33 +88,26 @@ visual-studio-code \
 docker \
 postman \
 atom \
-stats \
 notion \
 telegram \
 ticktick \
 zoom \
 vlc \
-numi \
 intellij-idea \
 whatsapp \
 authy \
 pixel-picker \
 suspicious-package \
-dash \
-insomnia \
 kawa \
-copyq \
-calibre \
 microsoft-office \
-font-fira-code \
-qlmarkdown \
-quicklook-json \
-webpquicklook \
-quicklook-csv \
-brave-browser \
-discord \
-virtualbox \
-skype
+microsoft-edge \
+cleanmymac 
+
+# Add Symlink to pg commands
+ln -s /opt/homebrew/Cellar/libpq/13.3/bin/psql /usr/local/bin/psql
+
+echo "Setting go environment"
+mkdir -p $HOME/go/{bin,src,pkg}
 
 brew cleanup
 
@@ -137,14 +138,14 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 
-echo "Copying files"
-cp .aliases ~/
-cp .functions ~/
-cp .exports ~/
-cp .zshrc ~/
-cp .gitconfig ~/
-cp .p10k.zsh ~/
-cp -R .iterm-themes ~/
+echo "Symlinking files"
+ln -s ~/dotfiles/zshrc ~/.zshrc
+ln -s ~/dotfiles/aliases ~/.aliases
+ln -s ~/dotfiles/functions ~/.functions
+ln -s ~/dotfiles/exports ~/.exports
+ln -s ~/dotfiles/gitconfig ~/.gitconfig
+ln -s ~/dotfiles/gitignore ~/.gitignore
+ln -s ~/dotfiles/p10k.zsh ~/.p10k.zsh
 
 echo "Setting configuration defaults"
 mkdir -p  ~/Desktop/screenshots
@@ -207,6 +208,8 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 sudo nvram SystemAudioVolume=" "
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+# Disable key repeat
+defaults write -g ApplePressAndHoldEnabled -bool false
 
 ###############################################################################
 # Kill affected applications                                                  #

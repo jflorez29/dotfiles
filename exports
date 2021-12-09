@@ -1,6 +1,6 @@
 # Golang
-export GOPATH="${DEV_HOME}/go"
-export GOBIN="${GOPATH}/bin"
+export GOPATH="${HOME}/go"
+export GOBIN="${HOME}/bin"
 
 # default editor
 export EDITOR='nvim'
@@ -8,6 +8,8 @@ export EDITOR='nvim'
 # Prefer US English and use UTF-8 encoding.
 export LANG="en_US"
 export LC_ALL="en_US.UTF-8"
+
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

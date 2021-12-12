@@ -82,6 +82,7 @@ spotify \
 iterm2 \
 expressvpn \
 alfred \
+raycast \
 lastpass \
 the-unarchiver \
 visual-studio-code \

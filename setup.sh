@@ -71,35 +71,22 @@ httpie \
 pyenv \
 ripgrep \
 git \
-tmux \
-kap
+volta \
+tmux
 
 echo "Installing cask apps .."
 
 brew install --cask firefox \
 spotify \
 iterm2 \
-expressvpn \
-alfred \
+raycast \
 the-unarchiver \
 visual-studio-code \
-docker \
 postman \
-atom \
-notion \
-telegram \
 ticktick \
 zoom \
 vlc \
 intellij-idea \
-whatsapp \
-authy \
-pixel-picker \
-suspicious-package \
-kawa \
-microsoft-office \
-microsoft-edge \
-cleanmymac 
 
 # Add Symlink to pg commands
 ln -s /opt/homebrew/Cellar/libpq/13.3/bin/psql /usr/local/bin/psql
@@ -112,16 +99,6 @@ brew cleanup
 echo "Installing sdk"
 curl -s "https://get.sdkman.io?rcupdate=false" | bash
 
-echo "Installing nvm"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completio
-
-echo "Installing node LTS"
-nvm install node lts
-
 echo "Installing Oh-My-Zsh .."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
   echo "Could not install Oh My Zsh" >/dev/stderr
@@ -130,7 +107,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/ba
 
 echo "installing zsh plugins ..."
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/zdharma-continuum/fast-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install

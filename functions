@@ -67,3 +67,16 @@ compress() {
   tar -cpJf "$1".tar.xz "$1"
   echo "Done"
 }
+
+### Convert video from MOV to MP4
+### Explanation:
+###
+###  -c:v libx264: Uses the libx264 encoder for video, known for good quality and compression.
+###  -preset medium: Sets the encoding speed/quality balance. "medium" is a good starting point.
+###  -crf 23: Constant Rate Factor. Lower values generally mean higher quality but larger file sizes. 23 is a decent balance.
+###  -c:a aac: Uses the AAC encoder for audio.
+###  -b:a 128k: Sets the audio bitrate to 128kbps.
+mov_to_mp4() {
+  echo "Converting video $1 to $2"
+  ffmpeg -i "$1"  -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k "$2"
+}

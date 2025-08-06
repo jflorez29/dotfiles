@@ -53,7 +53,7 @@ echo "Installing apps .."
 brew install htop \
 ag \
 tree \
-exa \
+eza \
 cowsay \
 bat \
 bottom \
@@ -69,6 +69,7 @@ nvim \
 autojump \
 httpie \
 pyenv \
+pyenv-virtualenv \
 ripgrep \
 git \
 volta \
@@ -111,8 +112,8 @@ git clone --depth=1 https://github.com/zdharma-continuum/fast-syntax-highlightin
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 echo "installing spaceship theme ..."
-git clone --depth=1 https://github.com/spaceship-prompt/spaceship-prompt.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/spaceship
-
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+ln -sf "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 echo "Symlinking files"
 ln -s ~/dotfiles/zshrc ~/.zshrc

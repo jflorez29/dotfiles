@@ -18,8 +18,8 @@ alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && kill
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # List files and directories
-alias ll="exa --long --header --git --time-style=long-iso --links"
-alias la="exa --long --header --git --all --time-style=long-iso --links"
+alias ll="eza --long --header --git --time-style=long-iso --links"
+alias la="eza --long --header --git --all --time-style=long-iso --links"
 
 # ssh utils
 alias ssh-copy="pbcopy < ~/.ssh/id_rsa.pub && echo 'Copied !!'"

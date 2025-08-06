@@ -30,6 +30,23 @@ extract () {
   fi
 }
 
+clone() {
+  local REPOS_DIR="$HOME/repos"
+  local REPO_URL="$1"
+
+  if [[ -z "$REPO_URL" ]]; then
+    echo "Usage: clone <repository-url>"
+    return 1
+  fi
+
+  cd "$REPOS_DIR" || return 1
+
+  git clone "$REPO_URL" || return 1
+
+  local DIR_NAME=$(basename "$REPO_URL" .git)
+  cd "$DIR_NAME" || return 1
+}
+
 # Get gzip information (gzipped file size + reduction size).
 gz() {
 

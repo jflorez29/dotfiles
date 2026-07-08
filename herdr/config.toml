@@ -1,0 +1,144 @@
+onboarding = false
+# ~/.config/herdr/config.toml
+# Ported from ~/.tmux.conf to keep muscle memory. Prefix = C-a.
+# herdr equivalents:  tmux "window" -> herdr "tab"   |   tmux "session" -> herdr "workspace"
+# New panes/splits inherit the current directory automatically (via OSC 7),
+# so tmux's `-c "#{pane_current_path}"` needs no config here.
+# Reload after edits:  prefix+r   (or:  herdr server reload-config)
+
+[keys]
+# Prefix: C-a, same as tmux (default was ctrl+b)
+prefix = "ctrl+a"
+
+# ---------------------------------------------------------------------------
+# Splits  (tmux: | = side-by-side, - = stacked)
+#   NOTE the naming inversion is expected: herdr "vertical" = side-by-side.
+#   `v` kept as an alias so herdr's own default still works.
+# ---------------------------------------------------------------------------
+split_vertical   = ["prefix+|", "prefix+v"]   # | -> panes side by side
+split_horizontal = "prefix+-"                  # - -> panes stacked
+
+# ---------------------------------------------------------------------------
+# Pane focus — tmux hjkl, plus arrow-key aliases (both work side by side).
+# ---------------------------------------------------------------------------
+focus_pane_left  = ["prefix+h", "prefix+left"]
+focus_pane_down  = ["prefix+j", "prefix+down"]
+focus_pane_up    = ["prefix+k", "prefix+up"]
+focus_pane_right = ["prefix+l", "prefix+right"]
+
+# ---------------------------------------------------------------------------
+# Resize — PARADIGM DIFFERENCE.
+#   tmux had repeatable prefix+H/J/K/L. herdr has no direct resize action,
+#   only a modal resize. Enter it, then use h/j/k/l (or arrows), esc to exit.
+#   Moved off prefix+r because that is now reload (tmux muscle memory).
+# ---------------------------------------------------------------------------
+resize_mode = "prefix+shift+r"
+
+# shift+h/j/k/l intentionally freed (herdr's default was pane-SWAP, which would
+# hijack the keys your fingers expect to resize). Left unbound to avoid surprises.
+swap_pane_left  = ""
+swap_pane_down  = ""
+swap_pane_up    = ""
+swap_pane_right = ""
+
+# ---------------------------------------------------------------------------
+# Tabs == tmux windows
+# ---------------------------------------------------------------------------
+new_tab      = "prefix+c"                       # tmux: c (new-window)
+rename_tab   = "prefix+,"                       # rename the active tab
+close_tab    = "prefix+shift+x"                 # tmux: X (kill window) — closes the active tab
+previous_tab = ["prefix+p", "prefix+ctrl+p"]    # tmux: C-p
+next_tab     = ["prefix+n", "prefix+ctrl+n"]    # tmux: C-n
+switch_tab   = "prefix+1..9"                     # jump to tab/window N
+last_pane    = "prefix+space"                    # tmux: Space (last-window) — closest: last focused pane
+
+# ---------------------------------------------------------------------------
+# Copy mode — tmux prefix+[ (matches herdr default).
+#   Caveat: in-copy-mode vi keys (v=select, y=yank) are herdr's own and are not
+#   configurable from [keys]; behavior differs slightly from tmux mode-keys vi.
+# ---------------------------------------------------------------------------
+copy_mode = "prefix+["
+
+# ---------------------------------------------------------------------------
+# Zoom — tmux prefix+z (matches herdr default)
+# ---------------------------------------------------------------------------
+zoom = "prefix+z"
+
+# ---------------------------------------------------------------------------
+# Detach — tmux prefix+d.  herdr's default was prefix+q (kept as alias).
+# ---------------------------------------------------------------------------
+detach = ["prefix+d", "prefix+q"]
+
+# ---------------------------------------------------------------------------
+# Reload config — tmux prefix+r.  (herdr's default was prefix+shift+r.)
+# ---------------------------------------------------------------------------
+reload_config = "prefix+r"
+
+# ---------------------------------------------------------------------------
+# Close the focused pane — tmux had no single default; herdr uses prefix+x.
+# ---------------------------------------------------------------------------
+close_pane = "prefix+x"
+
+# ---------------------------------------------------------------------------
+# Lazygit — tmux: prefix+g opened a lazygit window.
+#   herdr's session navigator ("goto") normally owns prefix+g; relocated to
+#   prefix+shift+g so your prefix+g muscle memory opens lazygit instead.
+#   That frees prefix+shift+g from its default job (new_worktree), which
+#   moves to prefix+ctrl+g below.
+# ---------------------------------------------------------------------------
+goto = "prefix+shift+g"      # session navigator, moved off prefix+g
+new_worktree = "prefix+ctrl+g" # moved off prefix+shift+g to make room for goto
+
+# ---------------------------------------------------------------------------
+# Workspace navigation — tmux: prefix+( / prefix+) cycled sessions.
+#   alt+p/alt+n instead of shift+9/shift+0: those collided with
+#   switch_workspace's shift+1..9 range on digit 9 (herdr silently disabled
+#   switch_workspace to resolve it). alt+p/n is distinct from the tab
+#   bindings on plain p/n and ctrl+p/ctrl+n.
+#   switch_workspace mirrors switch_tab: jump straight to workspace N.
+# ---------------------------------------------------------------------------
+previous_workspace = "prefix+alt+p"
+next_workspace      = "prefix+alt+n"
+switch_workspace    = "prefix+alt+1..9"
+
+# ---------------------------------------------------------------------------
+# Agent navigation — cycle/jump through sidebar agent entries.
+#   alt+j/alt+k mirrors the vim-style h/j/k/l pane-focus convention (j=down,
+#   k=up the agent list). shift+1..9 is free now that switch_workspace
+#   moved to alt+1..9 above.
+# ---------------------------------------------------------------------------
+previous_agent = "prefix+alt+k"
+next_agent     = "prefix+alt+j"
+focus_agent    = "prefix+shift+1..9"
+
+# NOTE: [[keys.command]] below opens a new TOML table context — nothing
+# under [keys] can be added after this point in the file, or it silently
+# becomes a field of this command entry instead of a real keybinding.
+[[keys.command]]
+key = "prefix+g"
+type = "pane"
+command = "lazygit"
+description = "Open lazygit in a pane (tmux muscle memory: prefix+g)"
+
+# ---------------------------------------------------------------------------
+# UI / behavior parity
+# ---------------------------------------------------------------------------
+[ui]
+mouse_capture = true        # tmux: `set -g mouse on`
+show_agent_labels_on_pane_borders = true
+agent_panel_sort = "spaces"
+
+[session]
+resume_agents_on_restore = true   # tmux-continuum equivalent: bring panes/agents back on restart
+
+[advanced]
+# tmux had history-limit 100000 lines. herdr caps scrollback by BYTES (default 10MB).
+# Bumped to ~64MB for long agent/build output.
+scrollback_limit_bytes = 67108864
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+[ui.toast]
+delivery = "herdr"

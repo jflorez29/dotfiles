@@ -5,24 +5,18 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
+alias repos="cd ~/repos"
 
-# IP addresses
+# IP address
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
-
-# Recursively delete `.DS_Store` files
-alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
-
-# Show/hide hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # List files and directories
 alias ll="eza --long --header --git --time-style=long-iso --links"
 alias la="eza --long --header --git --all --time-style=long-iso --links"
 
-# ssh utils
-alias ssh-copy="pbcopy < ~/.ssh/id_rsa.pub && echo 'Copied !!'"
+# bat - syntax-highlighted cat
+alias cat='bat --paging=never'
+alias catp='bat'
 
 # Commands
 alias c=clear
@@ -45,3 +39,4 @@ alias gcf="git config --list"
 alias gp="git push"
 alias gm="git merge"
 alias gts="git tag -s"
+alias gmain="git checkout main && git pull origin main"

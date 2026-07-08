@@ -1,0 +1,51 @@
+# Ghostty Configuration
+# =====================
+
+# --- Font ---
+font-family = MesloLGMDZ Nerd Font Mono
+font-size = 13
+
+# --- Appearance ---
+#theme = Dracula
+#theme = TokyoNight Night
+theme = Sonokai
+#theme = Catppuccin Mocha
+background-opacity = 0.95
+background-blur = 24
+cursor-style = bar
+cursor-style-blink = false
+macos-titlebar-style = tabs
+window-padding-color = extend
+unfocused-split-opacity = 0.85
+mouse-hide-while-typing = true
+resize-overlay = after-first
+
+# --- Scrollback & Clipboard (agentic-friendly) ---
+scrollback-limit = 100000000
+clipboard-read = allow
+clipboard-paste-protection = false
+copy-on-select = true
+
+# --- Shell integration ---
+shell-integration = detect
+shell-integration-features = cursor,sudo,title,path
+
+# --- Working directory inheritance ---
+window-inherit-working-directory = true
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+# --- Behavior ---
+confirm-close-surface = false
+focus-follows-mouse = true
+window-save-state = always
+macos-option-as-alt = true
+
+# --- Keybinds ---
+# Toggle split zoom
+keybind = super+alt+z=toggle_split_zoom
+
+# Tabs
+keybind = super+shift+t=new_tab
+keybind = super+tab=next_tab
+keybind = super+shift+tab=previous_tab
